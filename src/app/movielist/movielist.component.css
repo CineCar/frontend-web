@@ -1,0 +1,6 @@
+.movie {
+  max-width: 500px;
+  margin: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}

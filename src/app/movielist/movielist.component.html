@@ -1,1 +1,16 @@
-<p>movielist works!</p>
+<mat-card *ngFor="let movie of movies" class="movie">
+  <mat-card-title>{{ movie.name }}</mat-card-title>
+  <mat-card-subtitle>
+    <span>Duration: </span>
+    <span>{{ movie.duration }}</span>
+    <span> min</span>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let movieScreening of movie.movieScreenings">
+        <mat-divider></mat-divider>
+        <span>{{ movieScreening.datetime | date: "short" }}</span>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
