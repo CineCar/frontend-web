@@ -1,15 +1,10 @@
-<mat-toolbar class="toolbar">
+<mat-toolbar class="toolbar" color="primary">
   <span>TicketShop</span>
   <div class="navbar">
-    <button
-      disableRipple="true"
-      isIconButton="true"
-      mat-button
-      [routerLink]="['/movies']"
-    >
+    <a disableRipple="true" mat-button [routerLink]="['/movies']">
       <mat-icon>movie</mat-icon>
       <span>Movies</span>
-    </button>
+    </a>
   </div>
   <span class="toolbar-spacer"></span>
   <button mat-icon-button aria-label="Staff login" [routerLink]="['/login']">
