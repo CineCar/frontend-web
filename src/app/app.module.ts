@@ -7,6 +7,9 @@ import { MovielistComponent } from './movielist/movielist.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { CartComponent } from './cart/cart.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModules } from './material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,13 +17,16 @@ import { CartComponent } from './cart/cart.component';
     MovielistComponent,
     CheckoutComponent,
     AuthenticationComponent,
-    CartComponent
+    CartComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModules,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
