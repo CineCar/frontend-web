@@ -2,6 +2,8 @@ import { Component, OnInit, NgModule, OnDestroy } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CartService } from '../services/cart.service';
+import { Movie, MovieScreening } from 'com.cinecar.objects';
 
 @Component({
   selector: 'app-movielist',
@@ -9,19 +11,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./movielist.component.css'],
 })
 export class MovielistComponent implements OnInit {
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   public movies;
+  private backendService: BackendService;
+  private cartService: CartService;
 
   ngOnInit(): void {
-    new BackendService(this.http).getMovies((movies) => {
+    this.backendService = new BackendService(this.http);
+    this.cartService = new CartService(this.http);
+
+    this.backendService.getMovies((movies) => {
       this.movies = movies;
     });
   }
 
-  openSnackBar() {
-    this._snackBar.open('Added ticket to cart 🎟', 'OK', {
-      duration: 3000,
+  openSnackBar(movieScreening: MovieScreening) {
+    this.cartService.addTicketToCart(movieScreening.getId(), (cart) => {
+      this.snackBar.open(`Added ticket for ${movieScreening.getMovie().getName()} to cart 🎟`, 'OK', {
+        duration: 3000,
+      });
     });
   }
 }

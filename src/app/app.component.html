@@ -11,13 +11,8 @@
     <mat-icon>login</mat-icon>
   </button>
   <button mat-icon-button aria-label="Shopping cart" [routerLink]="['/cart']">
-    <mat-icon
-      matBadge="8"
-      matBadgeSize="small"
-      matBadgePosition="before"
-      matBadgeColor="warn"
-      >shopping_cart</mat-icon
-    >
+    <mat-icon [matBadge]="badgeContent" matBadgeSize="small" matBadgePosition="before" matBadgeColor="warn">
+      shopping_cart</mat-icon>
   </button>
 </mat-toolbar>
 
