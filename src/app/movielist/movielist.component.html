@@ -1,33 +1,35 @@
-<div class="movie-list">
-  <mat-card *ngFor="let movie of movies" class="movie">
-    <div class="detail">
-      <div class="image" style="background-image: url('{{ movie.imageUrl }}')"></div>
-      <div class="information">
-        <p class="name">{{ movie.name }}</p>
-        <p class="duration">
-          <mat-icon>timelapse</mat-icon>
-          <span i8n>Running time: </span>
-          <span>{{ movie.duration }}</span>
-          <span> min</span>
-        </p>
-        <p class="price">
-          <mat-icon>money</mat-icon>
-          <span>Ticket price: </span>
-          <span>{{ movie.price | currency: "EUR" }}</span>
-        </p>
+<div class="component">
+  <div class="movie-list">
+    <mat-card *ngFor="let movie of movies" class="movie">
+      <div class="detail">
+        <div class="image" style="background-image: url('{{ movie.imageUrl }}')"></div>
+        <div class="information">
+          <p class="name">{{ movie.name }}</p>
+          <p class="duration">
+            <mat-icon>timelapse</mat-icon>
+            <span i8n>Running time: </span>
+            <span>{{ movie.duration }}</span>
+            <span> min</span>
+          </p>
+          <p class="price">
+            <mat-icon>money</mat-icon>
+            <span>Ticket price: </span>
+            <span>{{ movie.price | currency: "EUR" }}</span>
+          </p>
+        </div>
       </div>
-    </div>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let movieScreening of movie.movieScreenings">
-          <mat-divider></mat-divider>
-          <span mat-line>{{ movieScreening.datetime | date: "short" }}</span>
-          <span mat-line>Movie Screening</span>
-          <button mat-button (click)="openSnackBar(movieScreening)">
-            <mat-icon>shopping_cart</mat-icon> Add to cart
-          </button>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let movieScreening of movie.movieScreenings">
+            <mat-divider></mat-divider>
+            <span mat-line>{{ movieScreening.datetime | date: "short" }}</span>
+            <span mat-line>Movie Screening</span>
+            <button mat-button (click)="openSnackBar(movieScreening)">
+              <mat-icon>add_shopping_cart</mat-icon> Add to cart
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

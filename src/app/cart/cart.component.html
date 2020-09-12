@@ -1,1 +1,7 @@
-<p>cart works!</p>
+<div class="component">
+    <div class="cart-item-list">
+        <mat-card *ngFor="let ticket of tickets" class="movie">
+            <span>{{ticket.getId()}}</span>
+        </mat-card>
+    </div>
+</div>

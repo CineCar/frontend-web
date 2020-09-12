@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Cart, Ticket } from 'com.cinecar.objects';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  private cartService: CartService;
+  public tickets: Array<Ticket>;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.cartService = new CartService(this.http);
+
+    this.cartService.getCart((cart: Cart) => {
+      this.tickets = cart.getTickets();
+    });
   }
 
 }

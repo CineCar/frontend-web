@@ -27,12 +27,10 @@ export class CartService {
     }
   }
 
-  getCart(): Cart {
+  getCart(callback) {
     this.backendService.getCart(Number(localStorage.getItem("com.cinecar.Cart.id")), (cart) => {
-      this.cart = cart;
+      callback(cart);
     });
-
-    return this.cart;
   }
 
   addTicketToCart(movieScreeningId: number, callback) {
