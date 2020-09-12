@@ -35,10 +35,10 @@ export class CartService {
     return this.cart;
   }
 
-  addTicketToCart(movieScreeningId: number) {
+  addTicketToCart(movieScreeningId: number, callback) {
     this.getCartId((id) => {
       this.backendService.addTicketToCart(id, movieScreeningId, (cart: Cart) => {
-        console.log(cart);
+        callback(cart);
       });
     });
   }
