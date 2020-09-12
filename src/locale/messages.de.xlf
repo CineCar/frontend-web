@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="8abe901c0cc724449cdb7bb6484ee607fc98b1f7" datatype="html">
+        <source>TicketShop</source>
+        <target>EintrittskartenGeschäft</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4000a8d3b8be325eb70a4c584cd0d86916109eec" datatype="html">
+        <source>Ticket price: </source>
+        <target>Preis: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movielist/movielist.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1b380b2fa9a51afae736b42486d2b6cbd27b4f62" datatype="html">
+        <source>Movie Screening</source>
+        <target>Vorführung</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movielist/movielist.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4eaa396a0686e4c364766a65e22dac1e59b9e100" datatype="html">
+        <source>Add to cart</source>
+        <target>Dem Einkaufswagen hinzufügen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/movielist/movielist.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

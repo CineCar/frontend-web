@@ -13,7 +13,7 @@
           </p>
           <p class="price">
             <mat-icon>money</mat-icon>
-            <span>Ticket price: </span>
+            <span i18n>Ticket price: </span>
             <span>{{ movie.price | currency: "EUR" }}</span>
           </p>
         </div>
@@ -23,9 +23,9 @@
           <mat-list-item *ngFor="let movieScreening of movie.movieScreenings">
             <mat-divider></mat-divider>
             <span mat-line>{{ movieScreening.datetime | date: "short" }}</span>
-            <span mat-line>Movie Screening</span>
+            <span mat-line i18n>Movie Screening</span>
             <button mat-button (click)="openSnackBar(movieScreening)">
-              <mat-icon>add_shopping_cart</mat-icon> Add to cart
+              <mat-icon>add_shopping_cart</mat-icon> <span i18n>Add to cart</span>
             </button>
           </mat-list-item>
         </mat-list>
