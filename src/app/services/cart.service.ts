@@ -9,41 +9,37 @@ import { Cart } from 'com.cinecar.objects';
 export class CartService {
 
   private backendService: BackendService;
-
   private cart: Cart;
 
-
-  constructor(private http: HttpClient) { 
-
+  constructor(private http: HttpClient) {
     this.backendService = new BackendService(this.http);
-
-
   }
 
 
-  createCart(){
-
-    this.backendService.createCart((cart) => {
-      localStorage.setItem("com.cinecar.Cart.id", `${<Cart>cart.getId()}`)
-    });
-
+  getCartId(callback) {
+    if (localStorage.getItem("com.cinecar.Cart.id") == null) {
+      this.backendService.createCart((cart) => {
+        localStorage.setItem("com.cinecar.Cart.id", `${cart.getId()}`)
+        callback(cart.getId);
+      });
+    } else {
+      callback(localStorage.getItem("com.cinecar.Cart.id"));
+    }
   }
 
   getCart(): Cart {
+    this.backendService.getCart(Number(localStorage.getItem("com.cinecar.Cart.id")), (cart) => {
+      this.cart = cart;
+    });
 
-    if(localStorage.getItem("com.cinecar.Cart.id") == null){
-      this.createCart();
-    } else {
+    return this.cart;
+  }
 
-      this.backendService.getCart(Number(localStorage.getItem("com.cinecar.Cart.id")), (cart) => {
-        this.cart = <Cart>cart;
-      })
-
-
-      return this.cart;
-
-    }
-
-
+  addTicketToCart(movieScreeningId: number) {
+    this.getCartId((id) => {
+      this.backendService.addTicketToCart(id, movieScreeningId, (cart: Cart) => {
+        console.log(cart);
+      });
+    });
   }
 }
