@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../services/cart.service';
 import { Movie, MovieScreening } from 'com.cinecar.objects';
+import { FilterPipe  } from "./filter.pipe";
 
 @Component({
   selector: 'app-movielist',
@@ -16,6 +17,8 @@ export class MovielistComponent implements OnInit {
   public movies;
   private backendService: BackendService;
   private cartService: CartService;
+  public search: string ='';
+
 
   ngOnInit(): void {
     this.backendService = new BackendService(this.http);
