@@ -1,6 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 import { Cart, Ticket } from 'com.cinecar.objects';
 import { CartService } from '../services/cart.service';
 
@@ -17,6 +18,9 @@ export class CartComponent implements OnInit {
   constructor(private http: HttpClient, private cartService: CartService) { 
 
   }
+
+  public search: string ='';
+
 
   ngOnInit(): void {
     this.cartService = new CartService(this.http);
