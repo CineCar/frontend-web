@@ -12,6 +12,7 @@ import { FilterPipe } from "./movielist/filter.pipe";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     AuthenticationComponent,
     CartComponent,
     FilterPipe,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
