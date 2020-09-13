@@ -1,1 +1,42 @@
-<p>admin works!</p>
+<div class="component">
+
+    <input type="search"  [(ngModel)]="search" class="input">
+  
+  
+    <div class="movie-list">
+      <mat-card *ngFor="let movie of (movies | filter:search)" class="movie">
+        <div class="detail">
+            <button mat-button (click)="openSnackBar()">
+                <mat-icon>remove</mat-icon> <span i18n>Remove Movie</span>
+            </button>
+          <div class="image" style="background-image: url('{{ movie.imageUrl }}')"></div>
+          <div class="information">
+            <p class="name">{{ movie.name }}</p>
+            <p class="duration">
+              <mat-icon>timelapse</mat-icon>
+              <span i18n>Running time: </span>
+              <span>{{ movie.duration }}</span>
+              <span> min</span>
+            </p>
+            <p class="price">
+              <mat-icon>money</mat-icon>
+              <span i18n>Ticket price: </span>
+              <span>{{ movie.price | currency: "EUR" }}</span>
+            </p>
+          </div>
+        </div>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let movieScreening of movie.movieScreenings">
+              <mat-divider></mat-divider>
+              <span mat-line>{{ movieScreening.datetime | date: "short" }}</span>
+              <span mat-line i18n>Movie Screening</span>
+              <button mat-button (click)="openSnackBar(movieScreening)">
+                <mat-icon>remove</mat-icon> <span i18n>Remove Screening</span>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
