@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
 
   private cartService: CartService;
   public tickets: Array<Ticket>;
+  public total: number; 
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +22,8 @@ export class CartComponent implements OnInit {
     this.cartService.getCart((cart: Cart) => {
       this.tickets = cart.getTickets();
     });
+
+    this.total = this.cartService.getTotal();
   }
 
 }
