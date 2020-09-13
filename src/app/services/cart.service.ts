@@ -9,7 +9,6 @@ import { Cart } from 'com.cinecar.objects';
 export class CartService {
 
   private backendService: BackendService;
-  private cart: Cart;
 
   constructor(private http: HttpClient) {
     this.backendService = new BackendService(this.http);
@@ -39,5 +38,23 @@ export class CartService {
         callback(cart);
       });
     });
+  }
+  getTotal(): number{
+    let total: number;
+    let cart: Cart;
+
+    this.getCart((dbcart) =>{
+
+      cart = <Cart>dbcart;
+      
+    })
+    for (let ticket of cart.getTickets()){
+      total += ticket.getMovieScreening().getMovie().getPrice();
+    }
+
+    return total;
+
+
+
   }
 }
