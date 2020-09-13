@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Cart, Ticket } from 'com.cinecar.objects';
 import { CartService } from '../services/cart.service';
-import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-cart',
@@ -15,17 +14,8 @@ export class CartComponent implements OnInit {
   public tickets: Array<Ticket> ;
   public total: number; 
 
-  public checkOutForm;
+  constructor(private http: HttpClient, private cartService: CartService) { 
 
-  constructor(private http: HttpClient, private cartService: CartService, formBuilder: FormBuilder ) { 
-
-    this.checkOutForm = formBuilder.group({
-      firstname:"",
-      lastname:"",
-      email:"",
-      creditCard:"",
-      pin:""
-    })
   }
 
   ngOnInit(): void {
@@ -37,14 +27,17 @@ export class CartComponent implements OnInit {
 
     
 
-    this.total = this.cartService.getTotal();
+    this.cartService.getTotal((total) => {
+      this.total = total;
+    })
+  }
+
+  removeTicketFromCart(id: number) {
+    this.cartService.removeTicketFromCart(id, (cart: Cart) => {this.tickets = cart.getTickets()});
   }
 
   showCheckoutForm() : void {
 
-  }
- 
-
-  
+  }  
 }
 

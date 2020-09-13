@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../services/backend.service';
 import { Cart } from 'com.cinecar.objects';
+import { callbackify } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -39,22 +40,29 @@ export class CartService {
       });
     });
   }
-  getTotal(): number{
+  removeTicketFromCart(ticketId: number, callback){
+    this.getCartId((id) => {
+      this.backendService.removeTicketFromCart(id, ticketId, (cart: Cart) => {
+        console.log(cart);
+        callback(cart);
+      });
+    });
+  }
+
+  getTotal(callback) {
     let total: number;
     let cart: Cart;
 
     this.getCart((dbcart) =>{
 
       cart = <Cart>dbcart;
+
+      for (let ticket of cart.getTickets()){
+        total += ticket.getMovieScreening().getMovie().getPrice();
+      }
+
+      callback(total);
       
-    })
-    for (let ticket of cart.getTickets()){
-      total += ticket.getMovieScreening().getMovie().getPrice();
-    }
-
-    return total;
-
-
-
+    });
   }
 }

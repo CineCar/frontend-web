@@ -1,1 +1,44 @@
-<p>checkout works!</p>
+<div>
+
+
+    <form [formGroup]="checkOutForm" >
+
+        <div>
+          <label for="firstname">
+            <span i18n>First Name</span>
+          </label>
+          <input id="firstname" type="text" formControlName="firstname">
+        </div>
+        <div>
+            <label for="lastname">
+              <span i18n>Last Name</span>
+            </label>
+            <input id="lastname" type="text" formControlName="lastname">
+        </div>
+        <div>
+            <label for="email">
+              <span i18n>Email</span>
+            </label>
+            <input id="email" type="email" formControlName="email">
+        </div>
+        <div>
+            <label for="creditCard">
+              <span i18n>CreditCard</span>
+            </label>
+            <input id="creditCard" type="text" formControlName="name">
+        </div>
+        <div>
+            <label for="pin">
+              <span i18n>PIN</span>
+            </label>
+            <input id="pin" type="password" formControlName="pin">
+        </div>
+      
+        
+      
+        <button class="button" type="submit">Purchase</button>
+      
+      </form>
+
+
+</div>

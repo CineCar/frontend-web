@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -7,8 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor() { }
 
+  public checkOutForm;
+
+  constructor(private http: HttpClient, private cartService: CartService, formBuilder: FormBuilder ) { 
+
+    this.checkOutForm = formBuilder.group({
+      firstname:"",
+      lastname:"",
+      email:"",
+      creditCard:"",
+      pin:""
+    })
+  }
   ngOnInit(): void {
   }
 

@@ -14,61 +14,17 @@
             <div mat-line>{{ticket.getMovieScreening().getDatetime() | date: "short"}} </div>
 
                 <span>{{ticket.getMovieScreening().getMovie().getPrice() | currency: "EUR"}}</span>
-                <span><button mat-button>
+                <span><button mat-button (click)="removeTicketFromCart(ticket.getId())">
                   <mat-icon>remove_circle</mat-icon>
                 </button></span>
     </mat-list-item>
   </mat-list>
 
-        <button mat-button (click)="showCheckoutForm()">
+        <button mat-button color="primary" (click)="showCheckoutForm()">
             <span i18n>Checkout cart</span>
         </button>
 
-        <div>
-
-
-            <form [formGroup]="checkOutForm" >
-
-                <div>
-                  <label for="firstname">
-                    <span i18n>First Name</span>
-                  </label>
-                  <input id="firstname" type="text" formControlName="firstname">
-                </div>
-                <div>
-                    <label for="lastname">
-                      <span i18n>Last Name</span>
-                    </label>
-                    <input id="lastname" type="text" formControlName="lastname">
-                </div>
-                <div>
-                    <label for="email">
-                      <span i18n>Email</span>
-                    </label>
-                    <input id="email" type="email" formControlName="email">
-                </div>
-                <div>
-                    <label for="creditCard">
-                      <span i18n>CreditCard</span>
-                    </label>
-                    <input id="creditCard" type="text" formControlName="name">
-                </div>
-                <div>
-                    <label for="pin">
-                      <span i18n>PIN</span>
-                    </label>
-                    <input id="pin" type="password" formControlName="pin">
-                </div>
-              
-                
-              
-                <button class="button" type="submit">Purchase</button>
-              
-              </form>
-
-
-        </div>
-
+       
 
 
     </div>

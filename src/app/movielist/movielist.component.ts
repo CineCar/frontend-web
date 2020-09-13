@@ -31,7 +31,7 @@ export class MovielistComponent implements OnInit {
   openSnackBar(movieScreening: MovieScreening) {
     this.cartService.addTicketToCart(movieScreening.getId(), (cart) => {
       this.snackBar.open(`Added ticket for ${movieScreening.getMovie().getName()} to cart 🎟`, 'OK', {
-        duration: 3000,
+        duration: 1000,
       });
     });
   }
