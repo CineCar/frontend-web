@@ -1,27 +1,25 @@
+<div class="component">
 
-<div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label><span i18n>Username</span></mat-label>
+                    <input type="text" id="username" matInput>
+                  </mat-form-field>
+            </div>
+            <div>
 
-    <form [formGroup]="loginForm" >
+                    <mat-form-field appearance="fill">
+                        <mat-label><span i18n>Password</span></mat-label>
+                        <input type="password" id="password" matInput>
+                      </mat-form-field>
+            </div>
 
-        <div>
-          <label for="username">
-            <span i18n>Username</span>
-          </label>
-          <input id="username" type="text" formControlName="username">
-        </div>
-        <div>
-            <label for="password">
-              <span i18n>Password</span>
-            </label>
-            <input id="password" type="password" formControlName="password">
-        </div>
-        
-      
-        
-      
-        <button class="button" type="submit">Login</button>
-      
-      </form>
-
+            <button mat-raised-button class="button" type="submit" color="primary">
+                <mat-icon>lock</mat-icon>
+                <span>Login</span>
+            </button>
+        </form>
+       
 
 </div>
