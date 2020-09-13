@@ -1,15 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Movie } from 'com.cinecar.objects';
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: any, searchValue): any {
-
-    if (!searchValue) return value;
-    return value.filter((v) => v.name.toLowerCase().indexOf(searchValue.toLowerCase()) > -1 || v.size.toLowerCase().indexOf(searchValue.toLowerCase()) > -1)
-
-  } // TAKEN FROM: https://stackblitz.com/edit/angular-mrgzw3?file=src%2Fapp%2Ffilter.pipe.ts
-
+    transform(items: Movie[], searchText: string): any[] {
+        if (!items) {
+          return [];
+        }
+        if (!searchText) {
+          return items;
+        }
+        searchText = searchText.toLocaleLowerCase();
+    
+        return items.filter(it => {
+          return it.getName().toLocaleLowerCase().includes(searchText);
+        });
+    }
 }

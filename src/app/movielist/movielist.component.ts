@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../services/cart.service';
 import { Movie, MovieScreening } from 'com.cinecar.objects';
+import { FilterPipe  } from "./filter.pipe";
 
 @Component({
   selector: 'app-movielist',

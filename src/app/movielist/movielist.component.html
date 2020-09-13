@@ -1,10 +1,10 @@
 <div class="component">
 
-  <input type="search"  [(ngModel)]="search">
+  <input type="search"  [(ngModel)]="search" class="input">
 
-  
+
   <div class="movie-list">
-    <mat-card *ngFor="let movie of movies" class="movie">
+    <mat-card *ngFor="let movie of (movies | filter:search)" class="movie">
       <div class="detail">
         <div class="image" style="background-image: url('{{ movie.imageUrl }}')"></div>
         <div class="information">
