@@ -24,10 +24,18 @@
                 <td mat-cell *matCellDef="let ticket"> {{ticket.movieScreening.movie.price | currency: "EUR"}} </td>
                 <td mat-footer-cell *matFooterCellDef>{{total | currency: "EUR"}}</td>
             </ng-container>
-
-
-
-
         </table>
+
+        <button mat-button (click)="showCheckoutForm()">
+            <span i18n>Checkout cart</span>
+          </button>
+
+        <div *ngif="checkOutButtonClicked">
+
+
+        </div>
+
+
+
     </div>
 </div>
