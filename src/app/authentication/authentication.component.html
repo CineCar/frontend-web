@@ -1,1 +1,27 @@
-<p>authentication works!</p>
+
+<div>
+
+    <form [formGroup]="loginForm" >
+
+        <div>
+          <label for="username">
+            <span i18n>Username</span>
+          </label>
+          <input id="username" type="text" formControlName="username">
+        </div>
+        <div>
+            <label for="password">
+              <span i18n>Password</span>
+            </label>
+            <input id="password" type="password" formControlName="password">
+        </div>
+        
+      
+        
+      
+        <button class="button" type="submit">Login</button>
+      
+      </form>
+
+
+</div>
