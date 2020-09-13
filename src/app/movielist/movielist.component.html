@@ -1,10 +1,15 @@
 <div class="component">
-
-  <input type="search"  [(ngModel)]="search" class="input">
-
-
   <div class="movie-list">
-    <mat-card *ngFor="let movie of (movies | filter:search)" class="movie">
+    <div class="searchbar-constraint">
+      <div class="searchbar">
+        <div class="wrapper">
+          <mat-icon>search</mat-icon>
+          <input #searchQuery (keyup)="search(searchQuery.value)">
+          <mat-icon (click)="search(searchQuery.value)">arrow_forward</mat-icon>
+        </div>
+      </div>
+    </div>
+    <mat-card *ngFor="let movie of movies" class="movie">
       <div class="detail">
         <div class="image" style="background-image: url('{{ movie.imageUrl }}')"></div>
         <div class="information">
@@ -23,13 +28,15 @@
         </div>
       </div>
       <mat-card-content>
+
         <mat-list>
           <mat-list-item *ngFor="let movieScreening of movie.movieScreenings">
             <mat-divider></mat-divider>
             <span mat-line>{{ movieScreening.datetime | date: "short" }}</span>
             <span mat-line i18n>Movie Screening</span>
             <button mat-button (click)="openSnackBar(movieScreening)">
-              <mat-icon>add_shopping_cart</mat-icon> <span i18n>Add to cart</span>
+              <mat-icon>add_shopping_cart</mat-icon>
+              <span i18n>Add to cart</span>
             </button>
           </mat-list-item>
         </mat-list>

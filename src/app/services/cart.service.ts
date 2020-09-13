@@ -48,21 +48,4 @@ export class CartService {
       });
     });
   }
-
-  getTotal(callback) {
-    let total: number;
-    let cart: Cart;
-
-    this.getCart((dbcart) =>{
-
-      cart = <Cart>dbcart;
-
-      for (let ticket of cart.getTickets()){
-        total += ticket.getMovieScreening().getMovie().getPrice();
-      }
-
-      callback(total);
-      
-    });
-  }
 }

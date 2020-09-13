@@ -4,12 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../services/cart.service';
 import { Movie, MovieScreening } from 'com.cinecar.objects';
-import { FilterPipe  } from "./filter.pipe";
 
 @Component({
   selector: 'app-movielist',
   templateUrl: './movielist.component.html',
-  styleUrls: ['./movielist.component.css'],
+  styleUrls: ['./movielist.component.scss'],
 })
 export class MovielistComponent implements OnInit {
   constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
@@ -17,16 +16,18 @@ export class MovielistComponent implements OnInit {
   public movies;
   private backendService: BackendService;
   private cartService: CartService;
-  public search: string ='';
-
-
-  
 
   ngOnInit(): void {
     this.backendService = new BackendService(this.http);
     this.cartService = new CartService(this.http);
 
     this.backendService.getMovies((movies) => {
+      this.movies = movies;
+    });
+  }
+
+  search(query) {
+    this.backendService.searchMovies(query,(movies) => {
       this.movies = movies;
     });
   }

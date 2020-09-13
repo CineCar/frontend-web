@@ -24,6 +24,19 @@ export class BackendService {
     });
   }
 
+  searchMovies(query, callback) {
+    this.fetch("GET", "movies?search=" + encodeURIComponent(query), (json) => {
+
+      const movies: Array<Movie> = [];
+
+      json.forEach((jsonMovie) => {
+        movies.push(Movie.fromJSON(jsonMovie));
+      });
+
+      callback(movies);
+    });
+  }
+
   getMovie(id: number, callback) {
     this.fetch("GET", `movies/${id}`, (json) => {
       callback(Movie.fromJSON(json));
@@ -80,24 +93,31 @@ export class BackendService {
 
   private fetch(requestMethod: string, endpoint: string, callback, body?: any) {
 
+    document.querySelector(".spinner").classList.remove("hide");
 
-
-    if (requestMethod === "GET") {
-      this.http.get<any>(`${protocol}://${host}/${endpoint}`).subscribe((data) => {
-        callback(data.data, data.error);
-      });
-    } else if (requestMethod === "POST") {
-      this.http.post<any>(`${protocol}://${host}/${endpoint}`, JSON.stringify(body), {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).subscribe((data) => {
-        callback(data.data, data.error);
-      });
-    } else if(requestMethod === "DELETE"){
-      this.http.delete<any>(`${protocol}://${host}/${endpoint}`).subscribe ((data) =>{
-        callback(data.data, data.error);
-      });
+    try {
+      if (requestMethod === "GET") {
+        this.http.get<any>(`${protocol}://${host}/${endpoint}`).subscribe((data) => {
+          document.querySelector(".spinner").classList.add("hide");
+          callback(data.data, data.error);
+        });
+      } else if (requestMethod === "POST") {
+        this.http.post<any>(`${protocol}://${host}/${endpoint}`, JSON.stringify(body), {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }).subscribe((data) => {
+          document.querySelector(".spinner").classList.add("hide");
+          callback(data.data, data.error);
+        });
+      } else if(requestMethod === "DELETE"){
+        this.http.delete<any>(`${protocol}://${host}/${endpoint}`).subscribe ((data) => {
+          document.querySelector(".spinner").classList.add("hide");
+          callback(data.data, data.error);
+        });
+      }
+    } catch(err) {
+      document.querySelector(".spinner").classList.add("hide");
     }
   }
 }

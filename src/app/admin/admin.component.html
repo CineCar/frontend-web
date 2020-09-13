@@ -1,1 +1,26 @@
-<p>admin works!</p>
+<div class="component">
+
+
+    <mat-list>
+
+        <mat-list-item *ngFor="let movie of movies">
+            <button mat-button (click)="deleteMovie(movie.getId())">
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+              {{movie.getName()}}
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-button (click)="addMovie()">
+                <mat-icon>add_circle</mat-icon>
+            </button>
+
+        </mat-list-item>
+        
+    </mat-list>
+
+
+
+
+
+
+</div>
