@@ -2,56 +2,50 @@
     <div class="cart-item-list">
     
 
-        <table mat-table [dataSource]="tickets">
+      <mat-list>
+        <mat-list-item *ngFor="let ticket of tickets">
+          <mat-divider></mat-divider>
+          <div matListAvatar class="movie-image" style="background-image: url('{{ ticket.getMovieScreening().getMovie().getImageUrl() }}')"></div>
 
-            <ng-container matColumnDef="image">
-                <th mat-header-cell *matHeaderCellDef> Image </th>
-                <td mat-cell *matCellDef="let ticket"><div class="image" style="background-image: url('{{ ticket.movieScreening.movie.imageUrl }}')"></div></td>
-            </ng-container>
+           <div mat-line>
+            <span>{{ticket.getMovieScreening().getMovie().getName()}}</span>
+          </div>
 
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let ticket"> {{ticket.movieScreening.movie.name}} </td>
-            </ng-container>
+            <div mat-line>{{ticket.getMovieScreening().getDatetime() | date: "short"}} </div>
 
-            <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef> Date </th>
-                <td mat-cell *matCellDef="let ticket"> {{ticket.movieScreening.dateTime | date: "short"}} </td>
-                <td mat-footer-cell *matFooterCellDef>Total</td>
-            </ng-container>
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Price </th>
-                <td mat-cell *matCellDef="let ticket"> {{ticket.movieScreening.movie.price | currency: "EUR"}} </td>
-                <td mat-footer-cell *matFooterCellDef>{{total | currency: "EUR"}}</td>
-            </ng-container>
-        </table>
+                <span>{{ticket.getMovieScreening().getMovie().getPrice() | currency: "EUR"}}</span>
+                <span><button mat-button>
+                  <mat-icon>remove_circle</mat-icon>
+                </button></span>
+    </mat-list-item>
+  </mat-list>
 
         <button mat-button (click)="showCheckoutForm()">
             <span i18n>Checkout cart</span>
-          </button>
+        </button>
 
-        <div *ngif="checkOutButtonClicked">
+        <div>
 
 
-            <form [formGroup]="checkOutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+            <form [formGroup]="checkOutForm" >
 
                 <div>
                   <label for="firstname">
                     <span i18n>First Name</span>
                   </label>
-                  <input id="firstname" type="text" formControlName="name">
+                  <input id="firstname" type="text" formControlName="firstname">
                 </div>
                 <div>
                     <label for="lastname">
                       <span i18n>Last Name</span>
                     </label>
-                    <input id="lastname" type="text" formControlName="name">
+                    <input id="lastname" type="text" formControlName="lastname">
                 </div>
                 <div>
                     <label for="email">
                       <span i18n>Email</span>
                     </label>
-                    <input id="email" type="email" formControlName="name">
+                    <input id="email" type="email" formControlName="email">
                 </div>
                 <div>
                     <label for="creditCard">
@@ -63,7 +57,7 @@
                     <label for="pin">
                       <span i18n>PIN</span>
                     </label>
-                    <input id="pin" type="password" formControlName="name">
+                    <input id="pin" type="password" formControlName="pin">
                 </div>
               
                 

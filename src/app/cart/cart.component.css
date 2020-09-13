@@ -1,0 +1,12 @@
+.movie-image {
+    display: inline-block;
+    border-radius: 5px !important;
+    overflow: hidden;
+    width: 44px !important;
+    height: 67px !important;
+    background-size: cover;
+    background-position: center;
+    background-color: #666;
+    vertical-align: middle;
+    margin: 10px;
+  }

@@ -17,6 +17,8 @@ export class MovielistComponent implements OnInit {
   private backendService: BackendService;
   private cartService: CartService;
 
+  
+
   ngOnInit(): void {
     this.backendService = new BackendService(this.http);
     this.cartService = new CartService(this.http);

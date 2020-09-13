@@ -12,8 +12,7 @@ import { FormBuilder } from "@angular/forms";
 })
 export class CartComponent implements OnInit {
 
-  private cartService: CartService;
-  public tickets: Array<Ticket>;
+  public tickets: Array<Ticket> ;
   public total: number; 
 
   public checkOutForm;
@@ -39,6 +38,10 @@ export class CartComponent implements OnInit {
     
 
     this.total = this.cartService.getTotal();
+  }
+
+  showCheckoutForm() : void {
+
   }
  
 
