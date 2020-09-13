@@ -11,7 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { FilterPipe } from "./movielist/filter.pipe";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './material.module';
-import { FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
