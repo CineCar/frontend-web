@@ -1,22 +1,22 @@
 <div class="component">
 
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div>
                 <mat-form-field appearance="fill">
                     <mat-label><span i18n>Username</span></mat-label>
-                    <input type="text" id="username" matInput>
+                    <input type="text" matInput formControlName="username">
                   </mat-form-field>
             </div>
             <div>
 
                     <mat-form-field appearance="fill">
                         <mat-label><span i18n>Password</span></mat-label>
-                        <input type="password" id="password" matInput>
+                        <input type="password" matInput formControlName="password">
                       </mat-form-field>
             </div>
 
             <button mat-raised-button class="button" type="submit" color="primary">
-                <mat-icon>lock</mat-icon>
+                
                 <span>Login</span>
             </button>
         </form>

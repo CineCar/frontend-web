@@ -30,12 +30,10 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(values){
-
-    this.backendService.login(values.username, values.password, (response) =>{});
-
-
-
+  onSubmit() {
+    this.backendService.login(this.loginForm.get("username").value, this.loginForm.get("password").value, (success) =>{
+      console.log(success);
+    });
   }
 
 }
