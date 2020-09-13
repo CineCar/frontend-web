@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Cart, Ticket } from 'com.cinecar.objects';
@@ -23,7 +24,12 @@ export class CartComponent implements OnInit {
       this.tickets = cart.getTickets();
     });
 
+    
+
     this.total = this.cartService.getTotal();
   }
+ 
 
+  
 }
+
