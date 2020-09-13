@@ -1,0 +1,19 @@
+.cart-item-list {
+  max-width: 700px;
+  width: 100%;
+  margin-left: 50%;
+  transform: translate(-50%);
+}
+
+.movie-image {
+    display: inline-block;
+    border-radius: 5px !important;
+    overflow: hidden;
+    width: 44px !important;
+    height: 65px !important;
+    background-size: cover;
+    background-position: center;
+    background-color: #666;
+    vertical-align: middle;
+    margin: 10px;
+  }

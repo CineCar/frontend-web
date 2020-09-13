@@ -55,9 +55,16 @@ export class BackendService {
   }
 
   addTicketToCart(id: number, movieScreeningId: number, callback) {
-    this.fetch("POST", `carts/${id}`, (json) => {
+    this.fetch("POST", `carts/${id}/tickets`, (json) => {
       callback(Cart.fromJSON(json));
     }, { movieScreeningId: movieScreeningId })
+  }
+
+  removeTicketFromCart(cartId: number, ticketId: number, callback){
+    this.fetch("DELETE", `carts/${cartId}/tickets/${ticketId}`, (json) => {
+      callback(Cart.fromJSON(json));
+
+     });
   }
 
   private fetch(requestMethod: string, endpoint: string, callback, httpbody?: any) {
@@ -72,6 +79,10 @@ export class BackendService {
 
     } else if (requestMethod === "POST") {
       this.http.post<any>(`${protocol}://${host}/${endpoint}`, httpbody).subscribe((data) => {
+        callback(data.data);
+      });
+    } else if(requestMethod === "DELETE"){
+      this.http.delete<any>(`${protocol}://${host}/${endpoint}`).subscribe ((data) =>{
         callback(data.data);
       });
     }

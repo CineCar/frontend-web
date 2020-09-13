@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from "@angular/forms";
@@ -11,12 +12,15 @@ import { CartService } from '../services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  private cartService: CartService;
-  public tickets: Array<Ticket>;
+  public tickets: Array<Ticket> ;
+  public total: number; 
+
+  constructor(private http: HttpClient, private cartService: CartService) { 
+
+  }
 
   public search: string ='';
 
-  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.cartService = new CartService(this.http);
@@ -24,6 +28,20 @@ export class CartComponent implements OnInit {
     this.cartService.getCart((cart: Cart) => {
       this.tickets = cart.getTickets();
     });
+
+    
+
+    this.cartService.getTotal((total) => {
+      this.total = total;
+    })
   }
 
+  removeTicketFromCart(id: number) {
+    this.cartService.removeTicketFromCart(id, (cart: Cart) => {this.tickets = cart.getTickets()});
+  }
+
+  showCheckoutForm() : void {
+
+  }  
 }
+

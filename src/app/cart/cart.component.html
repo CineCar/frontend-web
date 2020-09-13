@@ -1,7 +1,31 @@
 <div class="component">
     <div class="cart-item-list">
-        <mat-card *ngFor="let ticket of tickets" class="movie">
-            <span>{{ticket.getId()}}</span>
-        </mat-card>
+    
+
+      <mat-list>
+        <mat-list-item *ngFor="let ticket of tickets">
+          <mat-divider></mat-divider>
+          <div matListAvatar class="movie-image" style="background-image: url('{{ ticket.getMovieScreening().getMovie().getImageUrl() }}')"></div>
+
+           <div mat-line>
+            <span>{{ticket.getMovieScreening().getMovie().getName()}}</span>
+          </div>
+
+            <div mat-line>{{ticket.getMovieScreening().getDatetime() | date: "short"}} </div>
+
+                <span>{{ticket.getMovieScreening().getMovie().getPrice() | currency: "EUR"}}</span>
+                <span><button mat-button (click)="removeTicketFromCart(ticket.getId())">
+                  <mat-icon>remove_circle</mat-icon>
+                </button></span>
+    </mat-list-item>
+  </mat-list>
+
+        <button mat-button color="primary" (click)="showCheckoutForm()">
+            <span i18n>Checkout cart</span>
+        </button>
+
+       
+
+
     </div>
 </div>

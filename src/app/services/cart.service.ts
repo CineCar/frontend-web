@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../services/backend.service';
 import { Cart } from 'com.cinecar.objects';
+import { callbackify } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ import { Cart } from 'com.cinecar.objects';
 export class CartService {
 
   private backendService: BackendService;
-  private cart: Cart;
 
   constructor(private http: HttpClient) {
     this.backendService = new BackendService(this.http);
@@ -38,6 +38,31 @@ export class CartService {
       this.backendService.addTicketToCart(id, movieScreeningId, (cart: Cart) => {
         callback(cart);
       });
+    });
+  }
+  removeTicketFromCart(ticketId: number, callback){
+    this.getCartId((id) => {
+      this.backendService.removeTicketFromCart(id, ticketId, (cart: Cart) => {
+        console.log(cart);
+        callback(cart);
+      });
+    });
+  }
+
+  getTotal(callback) {
+    let total: number;
+    let cart: Cart;
+
+    this.getCart((dbcart) =>{
+
+      cart = <Cart>dbcart;
+
+      for (let ticket of cart.getTickets()){
+        total += ticket.getMovieScreening().getMovie().getPrice();
+      }
+
+      callback(total);
+      
     });
   }
 }

@@ -20,6 +20,8 @@ export class MovielistComponent implements OnInit {
   public search: string ='';
 
 
+  
+
   ngOnInit(): void {
     this.backendService = new BackendService(this.http);
     this.cartService = new CartService(this.http);
@@ -32,7 +34,7 @@ export class MovielistComponent implements OnInit {
   openSnackBar(movieScreening: MovieScreening) {
     this.cartService.addTicketToCart(movieScreening.getId(), (cart) => {
       this.snackBar.open(`Added ticket for ${movieScreening.getMovie().getName()} to cart 🎟`, 'OK', {
-        duration: 3000,
+        duration: 1000,
       });
     });
   }
