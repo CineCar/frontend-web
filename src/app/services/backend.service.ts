@@ -67,6 +67,17 @@ export class BackendService {
      });
   }
 
+  login(username: string, password: string, callback) {
+    this.fetch("POST",`login`, {id:username, password: password}, (session, err) => {
+      if(err) callback(false);
+      else {
+        localStorage.setItem("com.cinecar.Session.Id", session.id);
+        localStorage.setItem("com.cinecar.Session.Token", session.token);
+        callback(true);
+      }
+    });
+  }
+
   private fetch(requestMethod: string, endpoint: string, callback, httpbody?: any) {
 
 
@@ -74,16 +85,16 @@ export class BackendService {
     if (requestMethod === "GET") {
 
       this.http.get<any>(`${protocol}://${host}/${endpoint}`).subscribe((data) => {
-        callback(data.data);
+        callback(data.data, data.error);
       });
 
     } else if (requestMethod === "POST") {
       this.http.post<any>(`${protocol}://${host}/${endpoint}`, httpbody).subscribe((data) => {
-        callback(data.data);
+        callback(data.data, data.error);
       });
     } else if(requestMethod === "DELETE"){
       this.http.delete<any>(`${protocol}://${host}/${endpoint}`).subscribe ((data) =>{
-        callback(data.data);
+        callback(data.data, data.error);
       });
     }
   }
