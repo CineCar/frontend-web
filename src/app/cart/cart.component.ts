@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 import { Cart, Ticket } from 'com.cinecar.objects';
 import { CartService } from '../services/cart.service';
 
@@ -12,6 +13,8 @@ export class CartComponent implements OnInit {
 
   private cartService: CartService;
   public tickets: Array<Ticket>;
+
+  public search: string ='';
 
   constructor(private http: HttpClient) { }
 
