@@ -12,8 +12,10 @@ import { CartService } from '../services/cart.service';
 })
 export class EditmovieComponent implements OnInit {
   private backendService: BackendService;
+  private formBuilder: FormBuilder;
   public editForm;
   public movie: Movie;
+
 
   constructor(
     private http: HttpClient,
@@ -39,12 +41,22 @@ export class EditmovieComponent implements OnInit {
 
     this.backendService.getMovie(
       parseInt(this.route.snapshot.paramMap.get('id')),
-      (movie) => {
+      (movie: Movie) => {
         console.log(movie);
+        this.editForm.controls['name'].setValue(movie.getName());
+        this.editForm.controls['duration'].setValue(movie.getDuration());
+        this.editForm.controls['price'].setValue(movie.getPrice());
+        this.editForm.controls['imageUrl'].setValue(movie.getImageUrl());
+        
       }
     );
+    
   }
   onSubmit(name, duration, price, imageUrl){
+    
+    
+
+
 
   }
 }

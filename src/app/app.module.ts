@@ -14,10 +14,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { MoviescreeninglistComponent } from './moviescreeninglist/moviescreeninglist.component';
+import { EditmovieComponent } from './editmovie/editmovie.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    EditmovieComponent,
     MovielistComponent,
     CheckoutComponent,
     AuthenticationComponent,
