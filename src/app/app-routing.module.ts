@@ -6,6 +6,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { AdminComponent } from './admin/admin.component';
 import { MoviescreeninglistComponent } from './moviescreeninglist/moviescreeninglist.component';
+import { EditmovieComponent } from './editmovie/editmovie.component';
 
 const routes: Routes = [
   { path: 'movies', component: MovielistComponent },
@@ -22,11 +23,15 @@ const routes: Routes = [
     component: CheckoutComponent,
   },
   {
+    path: 'admin/movies/:id',
+    component: EditmovieComponent,
+  },
+  {
     path: 'login',
     component: AuthenticationComponent,
   },
   {
-    path: 'admin',
+    path: 'admin/movies',
     component: AdminComponent,
   },
   {

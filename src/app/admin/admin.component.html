@@ -1,26 +1,38 @@
 <div class="component">
+  <mat-list>
+    <mat-list-item *ngFor="let movie of movies">
+      <div
+        matListAvatar
+        class="movie-image"
+        style="background-image: url('{{ movie.getImageUrl() }}')"
+      ></div>
 
+      <span mat-line>
+        {{ movie.getName() }}
+      </span>
+      <span mat-line
+        >{{ movie.getPrice() | currency: "EUR" }} • {{
+          movie.getDuration()
+        }}
+        min</span
+      >
+      <button mat-button [routerLink]="['/admin/movies/' + movie.getId()]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button (click)="deleteMovie(movie.getId())">
+        <mat-icon color="primary">delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>
 
-    <mat-list>
-
-        <mat-list-item *ngFor="let movie of movies">
-            <button mat-button (click)="deleteMovie(movie.getId())">
-                <mat-icon>remove_circle</mat-icon>
-              </button>
-              {{movie.getName()}}
-        </mat-list-item>
-        <mat-list-item>
-            <button mat-button (click)="addMovie()">
-                <mat-icon>add_circle</mat-icon>
-            </button>
-
-        </mat-list-item>
-        
-    </mat-list>
-
-
-
-
-
-
+<div class="create-movie-button">
+  <button
+    mat-fab
+    aria-label="Create a new movie"
+    color="primary"
+    (click)="createMovie()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

@@ -103,6 +103,10 @@ export class BackendService {
     );
   }
 
+  isLoggedIn(): boolean {
+    return localStorage.getItem('com.cinecar.Session.Id') != null;
+  }
+
   private fetch(requestMethod: string, endpoint: string, callback, body?: any) {
     document.querySelector('.spinner').classList.remove('hide');
 
