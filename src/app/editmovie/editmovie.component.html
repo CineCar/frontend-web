@@ -1,1 +1,39 @@
-<p>editmoviecomponent works!</p>
+<div class="component">
+
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Name</span></mat-label>
+                <input type="text" matInput formControlName="name">
+              </mat-form-field>
+
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Duration</span></mat-label>
+                <input type="number" matInput formControlName="duration">
+              </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Price</span></mat-label>
+                <input type="number" matInput formControlName="price">
+              </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Image URL</span></mat-label>
+                <input type="text" matInput formControlName="imageUrl">
+              </mat-form-field>
+        </div>
+
+        <button mat-raised-button class="button" type="submit" color="primary">
+            <mat-icon>lock</mat-icon>
+            <span>Login</span>
+        </button>
+    </form>
+   
+
+</div>
