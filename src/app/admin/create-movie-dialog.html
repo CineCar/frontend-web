@@ -1,7 +1,42 @@
 <h1 mat-dialog-title>Dialog with elements</h1>
 <div mat-dialog-content>
-  This dialog showcases the title, close, content and actions elements.
+
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Name</span></mat-label>
+                <input type="text" matInput formControlName="name">
+              </mat-form-field>
+
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Duration</span></mat-label>
+                <input type="number" matInput formControlName="duration">
+              </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Price</span></mat-label>
+                <input type="number" matInput formControlName="price">
+              </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label><span i18n>Image URL</span></mat-label>
+                <input type="text" matInput formControlName="imageUrl">
+              </mat-form-field>
+        </div>
+
+        <button mat-raised-button class="button" type="submit" color="primary">
+            <mat-icon>save</mat-icon>
+            <span i18n>Save</span>
+        </button>
+      </form>
+
 </div>
 <div mat-dialog-actions>
-  <button mat-button>Close</button>
+  <button mat-button i18n>Save</button>
 </div>

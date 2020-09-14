@@ -9,6 +9,11 @@ const protocol = 'https';
   providedIn: 'root',
 })
 export class BackendService {
+  updateMovieInformation(newMovie: Movie, callback) {
+    this.fetch("POST", `movies/${newMovie.getId()}`,(json) =>{
+      callback(Movie.fromJSON(json));
+    }, newMovie.toJSON());
+  }
   constructor(private http: HttpClient) {}
 
   getMovies(callback) {

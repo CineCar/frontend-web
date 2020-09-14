@@ -53,8 +53,22 @@ export class EditmovieComponent implements OnInit {
     
   }
   onSubmit(name, duration, price, imageUrl){
+    let newMovie: Movie;
+
+
+    newMovie.setId(this.movie.getId());
+    newMovie.setName(name);
+    newMovie.setDuration(duration);
+    newMovie.setPrice(price);
+    newMovie.setImageUrl(imageUrl);
+
+    this.backendService.updateMovieInformation(newMovie, (movie: Movie) => {
+      this.movie = movie;
+    });
+
+
     
-    
+
 
 
 
