@@ -11,7 +11,7 @@ import { Movie, MovieScreening } from 'com.cinecar.objects';
   styleUrls: ['./movielist.component.scss'],
 })
 export class MovielistComponent implements OnInit {
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   public movies;
   private backendService: BackendService;
@@ -27,16 +27,20 @@ export class MovielistComponent implements OnInit {
   }
 
   search(query) {
-    this.backendService.searchMovies(query,(movies) => {
+    this.backendService.searchMovies(query, (movies) => {
       this.movies = movies;
     });
   }
 
   openSnackBar(movieScreening: MovieScreening) {
     this.cartService.addTicketToCart(movieScreening.getId(), (cart) => {
-      this.snackBar.open(`Added ticket for ${movieScreening.getMovie().getName()} to cart 🎟`, 'OK', {
-        duration: 1000,
-      });
+      this.snackBar.open(
+        `Added ticket for ${movieScreening.getMovie().getName()} to cart 🎟`,
+        'OK',
+        {
+          duration: 1000,
+        }
+      );
     });
   }
 }

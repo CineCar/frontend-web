@@ -9,11 +9,10 @@ const protocol = 'https';
   providedIn: 'root',
 })
 export class BackendService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getMovies(callback) {
-    this.fetch("GET", "movies", (json) => {
-
+    this.fetch('GET', 'movies', (json) => {
       const movies: Array<Movie> = [];
 
       json.forEach((jsonMovie) => {
@@ -25,8 +24,7 @@ export class BackendService {
   }
 
   searchMovies(query, callback) {
-    this.fetch("GET", "movies?search=" + encodeURIComponent(query), (json) => {
-
+    this.fetch('GET', 'movies?search=' + encodeURIComponent(query), (json) => {
       const movies: Array<Movie> = [];
 
       json.forEach((jsonMovie) => {
@@ -38,13 +36,13 @@ export class BackendService {
   }
 
   getMovie(id: number, callback) {
-    this.fetch("GET", `movies/${id}`, (json) => {
+    this.fetch('GET', `movies/${id}`, (json) => {
       callback(Movie.fromJSON(json));
     });
   }
 
   getMovieScreenings(callback) {
-    this.fetch("GET", "movie-screenings", (json) => {
+    this.fetch('GET', 'movie-screenings?nextWeeks=true', (json) => {
       const moviesScreenings: Array<MovieScreening> = [];
 
       json.forEach((jsonMovieScreening) => {
@@ -56,68 +54,91 @@ export class BackendService {
   }
 
   createCart(callback) {
-    this.fetch("POST", "carts", (json) => {
-      callback(Cart.fromJSON(json));
-    }, {});
+    this.fetch(
+      'POST',
+      'carts',
+      (json) => {
+        callback(Cart.fromJSON(json));
+      },
+      {}
+    );
   }
 
   getCart(id: number, callback) {
-    this.fetch("GET", `carts/${id}`, (json) => {
+    this.fetch('GET', `carts/${id}`, (json) => {
       callback(Cart.fromJSON(json));
     });
   }
 
   addTicketToCart(id: number, movieScreeningId: number, callback) {
-    this.fetch("POST", `carts/${id}/tickets`, (json) => {
-      callback(Cart.fromJSON(json));
-    }, { movieScreeningId: movieScreeningId })
+    this.fetch(
+      'POST',
+      `carts/${id}/tickets`,
+      (json) => {
+        callback(Cart.fromJSON(json));
+      },
+      { movieScreeningId: movieScreeningId }
+    );
   }
 
-  removeTicketFromCart(cartId: number, ticketId: number, callback){
-    this.fetch("DELETE", `carts/${cartId}/tickets/${ticketId}`, (json) => {
+  removeTicketFromCart(cartId: number, ticketId: number, callback) {
+    this.fetch('DELETE', `carts/${cartId}/tickets/${ticketId}`, (json) => {
       callback(Cart.fromJSON(json));
-
-     });
+    });
   }
 
   login(username: string, password: string, callback) {
-    this.fetch("POST",`login`, (session, err) => {
-      if(err) callback(false);
-      else {
-        localStorage.setItem("com.cinecar.Session.Id", session.id);
-        localStorage.setItem("com.cinecar.Session.Token", session.token);
-        callback(true);
-      }
-    }, {id:username, password: password});
+    this.fetch(
+      'POST',
+      `login`,
+      (session, err) => {
+        if (err) callback(false);
+        else {
+          localStorage.setItem('com.cinecar.Session.Id', session.id);
+          localStorage.setItem('com.cinecar.Session.Token', session.token);
+          callback(true);
+        }
+      },
+      { id: username, password: password }
+    );
   }
 
   private fetch(requestMethod: string, endpoint: string, callback, body?: any) {
-
-    document.querySelector(".spinner").classList.remove("hide");
+    document.querySelector('.spinner').classList.remove('hide');
 
     try {
-      if (requestMethod === "GET") {
-        this.http.get<any>(`${protocol}://${host}/${endpoint}`).subscribe((data) => {
-          document.querySelector(".spinner").classList.add("hide");
-          callback(data.data, data.error);
-        });
-      } else if (requestMethod === "POST") {
-        this.http.post<any>(`${protocol}://${host}/${endpoint}`, JSON.stringify(body), {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).subscribe((data) => {
-          document.querySelector(".spinner").classList.add("hide");
-          callback(data.data, data.error);
-        });
-      } else if(requestMethod === "DELETE"){
-        this.http.delete<any>(`${protocol}://${host}/${endpoint}`).subscribe ((data) => {
-          document.querySelector(".spinner").classList.add("hide");
-          callback(data.data, data.error);
-        });
+      if (requestMethod === 'GET') {
+        this.http
+          .get<any>(`${protocol}://${host}/${endpoint}`)
+          .subscribe((data) => {
+            document.querySelector('.spinner').classList.add('hide');
+            callback(data.data, data.error);
+          });
+      } else if (requestMethod === 'POST') {
+        this.http
+          .post<any>(
+            `${protocol}://${host}/${endpoint}`,
+            JSON.stringify(body),
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          )
+          .subscribe((data) => {
+            document.querySelector('.spinner').classList.add('hide');
+            callback(data.data, data.error);
+          });
+      } else if (requestMethod === 'DELETE') {
+        this.http
+          .delete<any>(`${protocol}://${host}/${endpoint}`)
+          .subscribe((data) => {
+            document.querySelector('.spinner').classList.add('hide');
+            callback(data.data, data.error);
+          });
       }
-    } catch(err) {
-      document.querySelector(".spinner").classList.add("hide");
+    } catch (err) {
+      document.querySelector('.spinner').classList.add('hide');
     }
   }
 }

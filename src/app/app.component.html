@@ -5,14 +5,24 @@
       <mat-icon>movie</mat-icon>
       <span>Movies</span>
     </a>
+    <a disableRipple="true" mat-button [routerLink]="['/movie-screenings']">
+      <mat-icon>theaters</mat-icon>
+      <span>Movie screenings</span>
+    </a>
   </div>
   <span class="toolbar-spacer"></span>
   <button mat-icon-button aria-label="Staff login" [routerLink]="['/login']">
     <mat-icon>login</mat-icon>
   </button>
   <button mat-icon-button aria-label="Shopping cart" [routerLink]="['/cart']">
-    <mat-icon [matBadge]="badgeContent" matBadgeSize="small" matBadgePosition="before" matBadgeColor="warn">
-      shopping_cart</mat-icon>
+    <mat-icon
+      [matBadge]="badgeContent"
+      matBadgeSize="small"
+      matBadgePosition="before"
+      matBadgeColor="warn"
+    >
+      shopping_cart</mat-icon
+    >
   </button>
 </mat-toolbar>
 
