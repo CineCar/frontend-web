@@ -1,3 +1,6 @@
+@import '../../styles.scss';
+$primary: map-get($custom-theme, primary);
+
 .movie {
   max-width: 750px;
   left: 50%;
@@ -45,4 +48,46 @@
 .movie .information .price mat-icon,
 .movie .information .duration mat-icon {
   margin-right: 5px;
+}
+
+.searchbar-constraint {
+  margin-bottom: 40px;
+}
+
+.searchbar:hover {
+  transform: scale(1.05);
+  transition: 0.3s transform;
+}
+
+.searchbar {
+  margin: auto;
+  max-width: 450px;
+  width: 100%;
+  background-color: #1e1e1e;
+  box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.1);
+  border-radius: 25px;
+}
+
+.searchbar .wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.searchbar input {
+  background-color: transparent;
+  color: #fff; 
+  margin: 10px 15px 10px 0px;
+  border: none;
+  font-size: 18px;
+  outline: none;
+  flex: auto;
+}
+
+.searchbar mat-icon {
+  flex: 0;
+  color: mat-color($primary);
+  margin: 10px 10px 10px 10px;
 }

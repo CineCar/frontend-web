@@ -1,0 +1,66 @@
+<div class="component">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label><span i18n>Name</span></mat-label>
+      <input type="text" matInput formControlName="name" />
+    </mat-form-field>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label
+          ><span i18n>{{ "HOME.DURATION" | translate }}</span></mat-label
+        >
+        <input type="number" matInput formControlName="duration" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label
+          ><span i18n>{{ "HOME.PRICE" | translate }}</span></mat-label
+        >
+        <input type="number" matInput formControlName="price" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label><span i18n>Image URL</span></mat-label>
+        <input type="text" matInput formControlName="imageUrl" />
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button class="button" type="submit" color="primary">
+      <mat-icon>save</mat-icon>
+      <span i18n>{{ "HOME.SAVE" | translate }}</span>
+    </button>
+  </form>
+
+  <mat-list *ngIf="movie != null">
+    <mat-list-item *ngFor="let movieScreening of movie.getMovieScreenings()">
+      <span mat-line>{{ movieScreening.getDatetime() | date: "short" }}</span>
+      <span mat-line>{{ "HOME.SCREENINGS" | translate }}</span>
+      <button
+        mat-button
+        (click)="changeMovieScreeningInformation(movieScreening)"
+      >
+        <mat-icon>edit</mat-icon>
+        <span i18n>{{ "HOME.EDIT" | translate }}</span>
+      </button>
+      <button
+        mat-button
+        (click)="deleteMovieScreening(movieScreening)"
+        color="primary"
+      >
+        <mat-icon>delete</mat-icon>
+        <span i18n>{{ "HOME.DELETE" | translate }}</span>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<div class="create-moviescreening-button" (click)="createMovieScreening()">
+  <button mat-fab aria-label="Create a new movie" color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

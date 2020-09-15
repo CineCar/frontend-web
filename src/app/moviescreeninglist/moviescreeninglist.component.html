@@ -1,0 +1,12 @@
+<div class="component">
+  <mat-list>
+    <mat-list-item *ngFor="let movieScreening of movieScreenings">
+      <span mat-line>{{ movieScreening.movie.name }}</span>
+      <span mat-line>{{ movieScreening.datetime | date: "short" }}</span>
+      <button mat-button (click)="openSnackBar(movieScreening)">
+        <mat-icon>add_shopping_cart</mat-icon>
+        <span i18n>{{ "HOME.CART" | translate }}</span>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</div>

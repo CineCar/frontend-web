@@ -27,21 +27,19 @@ export class CartComponent implements OnInit {
 
     this.cartService.getCart((cart: Cart) => {
       this.tickets = cart.getTickets();
+      this.total = 0;
+
+      for (let ticket of cart.getTickets()){
+        this.total += ticket.getMovieScreening().getMovie().getPrice();
+      }
     });
-
-    
-
-    this.cartService.getTotal((total) => {
-      this.total = total;
-    })
   }
 
-  removeTicketFromCart(id: number) {
-    this.cartService.removeTicketFromCart(id, (cart: Cart) => {this.tickets = cart.getTickets()});
+  removeTicketFromCart(ticket: Ticket) {
+    this.cartService.removeTicketFromCart(ticket.getId(), (cart: Cart) => {
+      this.total -= ticket.getMovieScreening().getMovie().getPrice();
+      this.tickets = cart.getTickets()
+    });
   }
-
-  showCheckoutForm() : void {
-
-  }  
 }
 

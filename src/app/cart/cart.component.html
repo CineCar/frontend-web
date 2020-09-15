@@ -1,31 +1,43 @@
 <div class="component">
-    <div class="cart-item-list">
-    
+  <div class="cart-item-list">
+    <mat-list>
+      <mat-list-item *ngFor="let ticket of tickets">
+        <mat-divider></mat-divider>
+        <div
+          matListAvatar
+          class="movie-image"
+          style="background-image: url('{{
+            ticket.getMovieScreening().getMovie().getImageUrl()
+          }}')"
+        ></div>
 
-      <mat-list>
-        <mat-list-item *ngFor="let ticket of tickets">
-          <mat-divider></mat-divider>
-          <div matListAvatar class="movie-image" style="background-image: url('{{ ticket.getMovieScreening().getMovie().getImageUrl() }}')"></div>
+        <div mat-line>
+          <span>{{ ticket.getMovieScreening().getMovie().getName() }}</span>
+        </div>
 
-           <div mat-line>
-            <span>{{ticket.getMovieScreening().getMovie().getName()}}</span>
-          </div>
+        <div mat-line>
+          {{ ticket.getMovieScreening().getDatetime() | date: "short" }}
+        </div>
 
-            <div mat-line>{{ticket.getMovieScreening().getDatetime() | date: "short"}} </div>
-
-                <span>{{ticket.getMovieScreening().getMovie().getPrice() | currency: "EUR"}}</span>
-                <span><button mat-button (click)="removeTicketFromCart(ticket.getId())">
-                  <mat-icon>remove_circle</mat-icon>
-                </button></span>
-    </mat-list-item>
-  </mat-list>
-
-        <button mat-button color="primary" (click)="showCheckoutForm()">
-            <span i18n>Checkout cart</span>
-        </button>
-
-       
-
-
+        <span>{{
+          ticket.getMovieScreening().getMovie().getPrice() | currency: "EUR"
+        }}</span>
+        <span
+          ><button mat-button (click)="removeTicketFromCart(ticket)">
+            <mat-icon>remove_circle</mat-icon>
+          </button></span
+        >
+      </mat-list-item>
+    </mat-list>
+    <div class="total">
+      <span i18n>{{ "HOME.TPRICE" | translate }}</span>
+      <span>:</span>
+      <p class="price">{{ total | currency: "EUR" }}</p>
     </div>
+
+    <button mat-raised-button color="primary" [routerLink]="['/cart/checkout']">
+      <mat-icon>payment</mat-icon>
+      <span i18n>{{ "HOME.CCART" | translate }}</span>
+    </button>
+  </div>
 </div>

@@ -1,0 +1,29 @@
+{
+  "HOME": {
+    "TITLE": "TicketShop",
+    "TEXT": "Movies",
+    "SCREENINGS": "Movie Screenings",
+    "SELECT": "Select Language",
+    "CART": "Add to cart",
+    "MINISCREENING": "Movie Screening",
+    "TPRICE": "Ticket price: ",
+    "TIME": "Running time: ",
+    "CCART": "Checkout cart",
+    "TOTALP": "Total price",
+    "ORDERNOW": " Order now",
+    "NAMEF": "First name",
+    "NAMEL": "Last name",
+    "PASSWORD": "Password",
+    "USERNAME": "Username",
+    "DURATION": "Duration",
+    "PRICE": "Price",
+    "SAVE": "Save changes",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "DELWARNING": "This action is permanent and cannot be undone. It will also delete all associated movie screenings.",
+    "CREATE": "Create",
+    "CREATENMS": "Create new Movie Screening",
+    "CREATENM": "Create new Movie",
+    "CANCEL": "Cancel"
+  }
+}

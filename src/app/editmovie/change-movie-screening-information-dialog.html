@@ -1,0 +1,15 @@
+<form [formGroup]="changeMovieScreeningInformationForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>Change movie screening information</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>{{ "HOME.MOVIENAME" | translate }}</mat-label>
+      <input type="datetime-local" formControlName="datetime" matInput />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button class="mat-button mat-primary" type="submit" color="primary">
+      Create
+    </button>
+    <button class="mat-button mat-primary" (click)="close()">Cancel</button>
+  </div>
+</form>
