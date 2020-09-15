@@ -37,7 +37,6 @@ export class EditmovieComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backendService = new BackendService(this.http);
 
     this.backendService.getMovie(
       parseInt(this.route.snapshot.paramMap.get('id')),
@@ -52,15 +51,15 @@ export class EditmovieComponent implements OnInit {
     );
     
   }
-  onSubmit(name, duration, price, imageUrl){
+  onSubmit(){
     let newMovie: Movie;
 
 
     newMovie.setId(this.movie.getId());
-    newMovie.setName(name);
-    newMovie.setDuration(duration);
-    newMovie.setPrice(price);
-    newMovie.setImageUrl(imageUrl);
+    newMovie.setName(this.editForm.get('name').value);
+    newMovie.setDuration(this.editForm.get('duration').value);
+    newMovie.setPrice(this.editForm.get('price').value);
+    newMovie.setImageUrl(this.editForm.get('imageUrl').value);
 
     this.backendService.updateMovieInformation(newMovie, (movie: Movie) => {
       this.movie = movie;
