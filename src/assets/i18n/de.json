@@ -1,0 +1,29 @@
+{
+  "HOME": {
+    "TITLE": "TicketShop",
+    "TEXT": "Filme",
+    "SCREENINGS": "Vorstellungen",
+    "SELECT": "Sprache wählen",
+    "CART": "Zum Warenkorb hinzufügen",
+    "MINISCREENING": "Vorstellung",
+    "TPRICE": "Preis pro Ticket: ",
+    "TIME": "Laufzeit: ",
+    "CCART": "zur Kasse",
+    "TOTALP": "Gesamtpreis",
+    "ORDERNOW": " Jetzt bestellen",
+    "NAMEF": "Vorname",
+    "NAMEL": "Nachname",
+    "PASSWORD": "Passwort",
+    "USERNAME": "Benutzername",
+    "DURATION": "Laufzeit",
+    "PRICE": "Preis",
+    "SAVE": "Änderungen speichern",
+    "EDIT": "bearbeiten",
+    "DELETE": "löschen",
+    "DELWARNING": "Diese Aktion ist unwiderruflich. Sie wird ebenfalls alle dazugehörigen Filmvorstellungen löschen.",
+    "CREATE": "erstellen",
+    "CREATENMS": "Neue Vorstellung erstellen",
+    "CREATENM": "Neuen Film erstellen",
+    "CANCEL": "abbrechen"
+  }
+}

@@ -1,45 +1,24 @@
 <div class="component">
-
   <form [formGroup]="checkOutForm" (ngSubmit)="onSubmit()">
-  
-          <mat-form-field appearance="fill">
-              <mat-label><span i18n>First Name</span></mat-label>
-              <input type="text" matInput formControlName="firstname">
-            </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label
+        ><span i18n>{{ "HOME.NAMEF" | translate }}</span></mat-label
+      >
+      <input type="text" matInput formControlName="firstname" />
+    </mat-form-field>
 
-
-      <div>
-          <mat-form-field appearance="fill">
-              <mat-label><span i18n>Last Name</span></mat-label>
-              <input type="text" matInput formControlName="lastname">
-            </mat-form-field>
-      </div>
-
-      <div>
-          <mat-form-field appearance="fill">
-              <mat-label><span i18n>Email-Adress</span></mat-label>
-              <input type="text" matInput formControlName="email">
-            </mat-form-field>
-      </div>
-
-      <div>
-        <mat-form-field appearance="fill">
-            <mat-label><span i18n>Credit Card Number</span></mat-label>
-            <input type="text" matInput formControlName="creditcard">
-          </mat-form-field>
-    </div>
     <div>
       <mat-form-field appearance="fill">
-          <mat-label><span i18n>PIN</span></mat-label>
-          <input type="password" matInput formControlName="pin">
-        </mat-form-field>
-  </div>
+        <mat-label
+          ><span i18n>{{ "HOME.NAMEL" | translate }}</span></mat-label
+        >
+        <input type="text" matInput formControlName="lastname" />
+      </mat-form-field>
+    </div>
 
-      <button mat-raised-button class="button" type="submit" color="primary">
-          <mat-icon>save</mat-icon>
-          <span i18n>Save</span>
-      </button>
+    <button mat-raised-button class="button" type="submit" color="primary">
+      <mat-icon>payment</mat-icon>
+      <span i18n>{{ "HOME.ORDERNOW" | translate }}</span>
+    </button>
   </form>
- 
-
 </div>

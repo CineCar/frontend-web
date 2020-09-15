@@ -1,14 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cart, Movie, MovieScreening } from 'com.cinecar.objects';
+import { Booking, Cart, Movie, MovieScreening } from 'com.cinecar.objects';
 
 const host = 'api.ticketshop.mixify.ga';
 const protocol = 'https';
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
-  })
+    'Content-Type': 'application/json',
+    Authorization: `${localStorage.getItem(
+      'com.cinecar.Session.Id'
+    )}:${localStorage.getItem('com.cinecar.Session.Token')}`,
+  }),
 };
 
 @Injectable({
@@ -16,9 +18,14 @@ const httpOptions = {
 })
 export class BackendService {
   updateMovieInformation(newMovie: Movie, callback) {
-    this.fetch("POST", `movies/${newMovie.getId()}`,(json) =>{
-      callback(Movie.fromJSON(json));
-    }, newMovie.toJSON());
+    this.fetch(
+      'POST',
+      `movies/${newMovie.getId()}`,
+      (json) => {
+        callback(Movie.fromJSON(json));
+      },
+      newMovie.toJSON(true)
+    );
   }
   constructor(private http: HttpClient) {}
 
@@ -75,8 +82,51 @@ export class BackendService {
     );
   }
 
-  deleteMovie(id, callback) {
-    this.fetch('DELETE', `movies/${id}`,(json) => {
+  createMovie(movie: Movie, callback) {
+    this.fetch(
+      'POST',
+      'movies',
+      (json) => {
+        callback(Movie.fromJSON(json));
+      },
+      movie.toJSON(true)
+    );
+  }
+
+  deleteMovie(id: number, callback) {
+    this.fetch('DELETE', `movies/${id}`, (json) => {
+      callback();
+    });
+  }
+
+  updateMovieScreeningInformation(movieScreening: MovieScreening, callback) {
+    this.fetch(
+      'POST',
+      `movie-screenings/${movieScreening.getId()}`,
+      (json) => {
+        callback(MovieScreening.fromJSON(json));
+      },
+      {
+        datetime: movieScreening.getDatetime(),
+      }
+    );
+  }
+
+  createMovieScreening(moviesScreening: MovieScreening, callback) {
+    this.fetch(
+      'POST',
+      `movies/${moviesScreening.getMovie().getId()}/movie-screenings`,
+      (json) => {
+        callback(MovieScreening.fromJSON(json));
+      },
+      {
+        datetime: moviesScreening.getDatetime(),
+      }
+    );
+  }
+
+  deleteMovieScreening(id, callback) {
+    this.fetch('DELETE', `movie-screenings/${id}`, (json) => {
       callback();
     });
   }
@@ -85,6 +135,20 @@ export class BackendService {
     this.fetch('GET', `carts/${id}`, (json) => {
       callback(Cart.fromJSON(json));
     });
+  }
+
+  checkoutCart(id: number, firstname: string, lastname: string, callback) {
+    this.fetch(
+      'POST',
+      `carts/${id}/checkout`,
+      (json) => {
+        callback(Booking.fromJSON(json));
+      },
+      {
+        firstname: firstname,
+        lastname: lastname,
+      }
+    );
   }
 
   addTicketToCart(id: number, movieScreeningId: number, callback) {
@@ -127,17 +191,16 @@ export class BackendService {
   private fetch(requestMethod: string, endpoint: string, callback, body?: any) {
     document.querySelector('.spinner').classList.remove('hide');
 
-    
-
     try {
       if (requestMethod === 'GET') {
         this.http
-          .get<any>(`${protocol}://${host}/${endpoint}`,
-          {
-           headers:{
-            'Content-Type':  'application/json',
-            'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
-           } 
+          .get<any>(`${protocol}://${host}/${endpoint}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `${localStorage.getItem(
+                'com.cinecar.Session.Id'
+              )}:${localStorage.getItem('com.cinecar.Session.Token')}`,
+            },
           })
           .subscribe((data) => {
             document.querySelector('.spinner').classList.add('hide');
@@ -149,10 +212,12 @@ export class BackendService {
             `${protocol}://${host}/${endpoint}`,
             JSON.stringify(body),
             {
-              headers:{
-               'Content-Type':  'application/json',
-               'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
-              } 
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${localStorage.getItem(
+                  'com.cinecar.Session.Id'
+                )}:${localStorage.getItem('com.cinecar.Session.Token')}`,
+              },
             }
           )
           .subscribe((data) => {
@@ -161,13 +226,14 @@ export class BackendService {
           });
       } else if (requestMethod === 'DELETE') {
         this.http
-          .delete<any>(`${protocol}://${host}/${endpoint}`,
-          {
-            headers:{
-             'Content-Type':  'application/json',
-             'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
-            } 
-           })
+          .delete<any>(`${protocol}://${host}/${endpoint}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `${localStorage.getItem(
+                'com.cinecar.Session.Id'
+              )}:${localStorage.getItem('com.cinecar.Session.Token')}`,
+            },
+          })
           .subscribe((data) => {
             document.querySelector('.spinner').classList.add('hide');
             callback(data.data, data.error);

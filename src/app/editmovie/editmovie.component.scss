@@ -1,0 +1,8 @@
+@import "../../styles.scss";
+$primary: map-get($custom-theme, primary);
+
+.create-moviescreening-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}

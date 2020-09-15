@@ -18,9 +18,11 @@
       >
       <button mat-button [routerLink]="['/admin/movies/' + movie.getId()]">
         <mat-icon>edit</mat-icon>
+        <mat-label>{{ "HOME.EDIT" | translate }}</mat-label>
       </button>
-      <button mat-button (click)="deleteMovie(movie)">
-        <mat-icon color="primary">delete</mat-icon>
+      <button mat-button (click)="deleteMovie(movie)" color="primary">
+        <mat-icon>delete</mat-icon>
+        <mat-label>{{ "HOME.DELETE" | translate }}</mat-label>
       </button>
     </mat-list-item>
   </mat-list>

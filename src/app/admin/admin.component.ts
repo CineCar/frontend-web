@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import {
   MatDialog,
   MatDialogClose,
@@ -7,7 +7,7 @@ import {
   MatDialogContent,
   MatDialogActions,
   MatDialogRef,
-  MAT_DIALOG_DATA
+  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { Movie } from 'com.cinecar.objects';
@@ -28,8 +28,8 @@ export class AdminComponent implements OnInit {
   constructor(
     backendService: BackendService,
     public dialog: MatDialog,
-    private formBuilder: FormBuilder) {
-      
+    private formBuilder: FormBuilder
+  ) {
     this.backendService = backendService;
   }
 
@@ -41,17 +41,13 @@ export class AdminComponent implements OnInit {
   deleteMovie(movie: Movie) {
     this.deleteMovieDialog = this.dialog.open(DeleteMovieDialog, {
       data: {
-        movie: movie
-      }
+        movie: movie,
+      },
     });
   }
 
   createMovie() {
     this.dialogRef = this.dialog.open(CreateMovieDialog);
-
-    this.dialogRef.afterClosed().subscribe((result) => {
-      
-    });
   }
 }
 
@@ -60,44 +56,59 @@ export class AdminComponent implements OnInit {
   templateUrl: './create-movie-dialog.html',
 })
 export class CreateMovieDialog implements OnInit {
-
   public createMovieForm: FormGroup;
 
   constructor(
-    backendService: BackendService,
     public dialog: MatDialog,
     private dialogRef: MatDialogRef<CreateMovieDialog>,
-    private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.createMovieForm = this.formBuilder.group({
+    private formBuilder: FormBuilder,
+    public backendService: BackendService
+  ) {
+    this.createMovieForm = formBuilder.group({
       name: '',
       duration: '',
       price: '',
-      imageUrl: ''
+      imageUrl: '',
     });
   }
-  save(){
-      this.dialogRef.close();
-  }
-  close(){
+
+  ngOnInit(): void {}
+
+  create() {
+    const values = this.createMovieForm.value;
+
+    const movie = new Movie();
+    movie.setDuration(values.duration);
+    movie.setName(values.name);
+    movie.setImageUrl(values.imageUrl);
+    movie.setPrice(values.price);
+
+    this.backendService.createMovie(movie, () => {
       this.dialogRef.close();
       this.createMovieForm.reset();
+      document.location.reload();
+    });
   }
 
+  close() {
+    this.dialogRef.close();
+    this.createMovieForm.reset();
+  }
 }
-
 
 @Component({
   selector: 'delete-movie-dialog',
   templateUrl: './delete-movie-dialog.html',
 })
 export class DeleteMovieDialog implements OnInit {
+  public movie: Movie;
+  private backendService: BackendService;
 
-  public movie : Movie;
-  private backendService : BackendService;
-
-  constructor(backendService: BackendService, private dialogRef: MatDialogRef<CreateMovieDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    backendService: BackendService,
+    private dialogRef: MatDialogRef<CreateMovieDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     this.backendService = backendService;
   }
 
@@ -112,6 +123,7 @@ export class DeleteMovieDialog implements OnInit {
   delete() {
     this.backendService.deleteMovie(this.movie.getId(), () => {
       this.dialogRef.close();
+      document.location.reload();
     });
   }
 }

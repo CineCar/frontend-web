@@ -3,14 +3,24 @@
   <div class="navbar">
     <a disableRipple="true" mat-button [routerLink]="['/movies']">
       <mat-icon>movie</mat-icon>
-      <span>Movies</span>
+      <span>{{ "HOME.TITLE" | translate }}</span>
     </a>
     <a disableRipple="true" mat-button [routerLink]="['/movie-screenings']">
       <mat-icon>theaters</mat-icon>
-      <span>Movie screenings</span>
+      <span>{{ "HOME.SCREENINGS" | translate }}</span>
     </a>
   </div>
+
   <span class="toolbar-spacer"></span>
+  <label for="">
+    {{ "HOME.SELECT" | translate }}
+    <select #langselect (change)="translate.use(langselect.value)">
+      <option *ngFor="let lang of translate.getLangs()" [value]="lang">
+        {{ lang }}
+      </option>
+    </select>
+  </label>
+
   <button mat-icon-button aria-label="Staff login" [routerLink]="['/login']">
     <mat-icon>login</mat-icon>
   </button>

@@ -10,46 +10,38 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-
-
   public checkOutForm;
 
   constructor(
     private http: HttpClient,
     private cartService: CartService,
-    backendService: BackendService,
+    public backendService: BackendService,
     formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
-    ) { 
-
+  ) {
     this.checkOutForm = formBuilder.group({
-      firstname:"",
-      lastname:"",
-      email:"",
-      creditcard:"",
-      pin:""
-    })
+      firstname: '',
+      lastname: '',
+    });
   }
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onSubmit() {
+    const values = this.checkOutForm.value;
+
+    this.cartService.checkoutCart(values.firstname, values.lastname, () => {
+      this.cartService.resetCart(() => {
+        console.log('card reset');
+      });
+
+      this.snackBar.open('Thank you for your order.', 'OK', {
+        duration: 8000,
+      });
+    });
   }
-
-  onSubmit(){
-
-    this.checkOutForm.reset();
-    this.snackBar.open("Thank you for your order. Your ticket and QR-Code will soon be mailed to you.",
-    "OK",
-    {
-      duration: 8000,
-    })
-
-
-
-
-  }
-
 }

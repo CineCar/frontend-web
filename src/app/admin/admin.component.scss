@@ -2,7 +2,7 @@
 $primary: map-get($custom-theme, primary);
 
 .create-movie-button {
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   right: 40px;
 }

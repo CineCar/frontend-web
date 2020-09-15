@@ -5,7 +5,7 @@
       <span mat-line>{{ movieScreening.datetime | date: "short" }}</span>
       <button mat-button (click)="openSnackBar(movieScreening)">
         <mat-icon>add_shopping_cart</mat-icon>
-        <span i18n>Add to cart</span>
+        <span i18n>{{ "HOME.CART" | translate }}</span>
       </button>
     </mat-list-item>
   </mat-list>
