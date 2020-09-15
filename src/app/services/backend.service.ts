@@ -1,9 +1,15 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cart, Movie, MovieScreening } from 'com.cinecar.objects';
 
 const host = 'api.ticketshop.mixify.ga';
 const protocol = 'https';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
+  })
+};
 
 @Injectable({
   providedIn: 'root',
@@ -115,10 +121,18 @@ export class BackendService {
   private fetch(requestMethod: string, endpoint: string, callback, body?: any) {
     document.querySelector('.spinner').classList.remove('hide');
 
+    
+
     try {
       if (requestMethod === 'GET') {
         this.http
-          .get<any>(`${protocol}://${host}/${endpoint}`)
+          .get<any>(`${protocol}://${host}/${endpoint}`,
+          {
+           headers:{
+            'Content-Type':  'application/json',
+            'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
+           } 
+          })
           .subscribe((data) => {
             document.querySelector('.spinner').classList.add('hide');
             callback(data.data, data.error);
@@ -129,9 +143,10 @@ export class BackendService {
             `${protocol}://${host}/${endpoint}`,
             JSON.stringify(body),
             {
-              headers: {
-                'Content-Type': 'application/json',
-              },
+              headers:{
+               'Content-Type':  'application/json',
+               'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
+              } 
             }
           )
           .subscribe((data) => {
@@ -140,7 +155,13 @@ export class BackendService {
           });
       } else if (requestMethod === 'DELETE') {
         this.http
-          .delete<any>(`${protocol}://${host}/${endpoint}`)
+          .delete<any>(`${protocol}://${host}/${endpoint}`,
+          {
+            headers:{
+             'Content-Type':  'application/json',
+             'Authorization': `${localStorage.getItem('com.cinecar.Session.Id')}:${localStorage.getItem('com.cinecar.Session.Token')}`
+            } 
+           })
           .subscribe((data) => {
             document.querySelector('.spinner').classList.add('hide');
             callback(data.data, data.error);

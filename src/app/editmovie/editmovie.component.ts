@@ -42,6 +42,7 @@ export class EditmovieComponent implements OnInit {
       parseInt(this.route.snapshot.paramMap.get('id')),
       (movie: Movie) => {
         console.log(movie);
+        this.movie = movie;
         this.editForm.controls['name'].setValue(movie.getName());
         this.editForm.controls['duration'].setValue(movie.getDuration());
         this.editForm.controls['price'].setValue(movie.getPrice());
@@ -52,7 +53,7 @@ export class EditmovieComponent implements OnInit {
     
   }
   onSubmit(){
-    let newMovie: Movie;
+    let newMovie: Movie = new Movie();
 
 
     newMovie.setId(this.movie.getId());
