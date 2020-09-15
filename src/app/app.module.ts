@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent, DeleteMovieDialog } from './admin/admin.component';
 import { MoviescreeninglistComponent } from './moviescreeninglist/moviescreeninglist.component';
 import { EditmovieComponent } from './editmovie/editmovie.component';
 
@@ -27,6 +27,8 @@ import { EditmovieComponent } from './editmovie/editmovie.component';
     AdminComponent,
     MovielistComponent,
     MoviescreeninglistComponent,
+    DeleteMovieDialog,
+    DeleteMovieDialog
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,7 @@
       <button mat-button [routerLink]="['/admin/movies/' + movie.getId()]">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-button (click)="deleteMovie(movie.getId())">
+      <button mat-button (click)="deleteMovie(movie)">
         <mat-icon color="primary">delete</mat-icon>
       </button>
     </mat-list-item>

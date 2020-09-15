@@ -75,6 +75,12 @@ export class BackendService {
     );
   }
 
+  deleteMovie(id, callback) {
+    this.fetch('DELETE', `movies/${id}`,(json) => {
+      callback();
+    });
+  }
+
   getCart(id: number, callback) {
     this.fetch('GET', `carts/${id}`, (json) => {
       callback(Cart.fromJSON(json));
